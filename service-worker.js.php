@@ -11,6 +11,9 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox
 if (workbox) {
 	console.log(`Workbox is loaded 🎉`);
 
+	var offlinePage = '/youre-offline/';
+    workbox.precaching.precacheAndRoute([offlinePage]);
+
 	var match = function (url, event) {
 		console.log(url);
 		if ( typeof url !== 'object' || typeof url.url !== 'object' || typeof url.event !== 'object' ) {
@@ -36,23 +39,33 @@ if (workbox) {
 		}*/
 
 		return false;
-	}
+	};
+
+	var handler = async function ( obj ) {
+	    var strategyObject = {
+            cacheName: 'vanguard-networkfirst-v2',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    // Keep at most 50 entries.
+                    maxEntries: 50,
+                    // Don't keep any entries for more than 1 hour.
+                    maxAgeSeconds: 60 * 60,
+                    // Automatically cleanup if quota is exceeded.
+                    purgeOnQuotaError: true
+                })
+            ]
+        };
+
+	    try {
+            return workbox.strategies.networkFirst( strategyObject ).handle( obj.event );
+        } catch ( err ) {
+            return caches.match( offlinePage );
+        }
+    };
 
 	workbox.routing.registerRoute(
 		match,
-		workbox.strategies.networkFirst({
-			cacheName: 'vanguard-networkfirst-v2',
-			plugins: [
-				new workbox.expiration.Plugin({
-					// Keep at most 50 entries.
-					maxEntries: 50,
-					// Don't keep any entries for more than 1 hour.
-					maxAgeSeconds: 60 * 60,
-					// Automatically cleanup if quota is exceeded.
-					purgeOnQuotaError: true
-				})
-			]
-		})
+		handler
 	);
 } else {
 	console.log(`Workbox didn't load 😬`);
