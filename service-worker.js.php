@@ -22,7 +22,7 @@ if (workbox) {
 		}
 
 		var hosts = [];
-		hosts['vanguard1.blr.rtdemo.in'] = 'vanguard1.blr.rtdemo.in';
+		hosts['vanguard2.c.rtdemo.in'] = 'vanguard2.c.rtdemo.in';
 		//hosts['fonts.gstatic.com'] = 'fonts.gstatic.com';
 		hosts['cdn.onesignal.com'] = 'cdn.onesignal.com';
 

@@ -4,29 +4,29 @@
   "description": "A Nigerian newspaper and Online version of the Vanguard, a daily publication in Nigeria covering Nigeria news, Niger delta, general national news, politics, business, energy, sports, entertainment, fashion,lifestyle human interest stories, etc",
   "lang": "en-US",
   "dir": "ltr",
-  "start_url": "https://vanguard1.blr.rtdemo.in/",
+  "start_url": "https://vanguard2.c.rtdemo.in/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#efefef",
   "theme_color": "#008ec2",
   "icons": [
     {
-      "src": "https://vanguard1.blr.rtdemo.in/wp-content/uploads/2018/10/Snapchat-for-PC-Free-Download.png",
+      "src": "https://vanguard2.c.rtdemo.in/wp-content/uploads/2016/06/vanguardlogo.png",
       "sizes": "150x150",
       "type": "image/png"
     },
     {
-      "src": "https://vanguard1.blr.rtdemo.in/wp-content/uploads/2018/10/Snapchat-for-PC-Free-Download.png",
+      "src": "https://vanguard2.c.rtdemo.in/wp-content/uploads/2016/06/vanguardlogo.png",
       "sizes": "300x300",
       "type": "image/png"
     },
     {
-      "src": "https://vanguard1.blr.rtdemo.in/wp-content/uploads/2018/10/Snapchat-for-PC-Free-Download.png",
+      "src": "https://vanguard2.c.rtdemo.in/wp-content/uploads/2016/06/vanguardlogo.png",
       "sizes": "100x100",
       "type": "image/png"
     },
     {
-      "src": "https://vanguard1.blr.rtdemo.in/wp-content/uploads/2018/10/Snapchat-for-PC-Free-Download.png",
+      "src": "https://vanguard2.c.rtdemo.in/wp-content/uploads/2016/06/vanguardlogo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
