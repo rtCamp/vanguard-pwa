@@ -55,7 +55,7 @@ if (workbox) {
         });
 
         var resourceCaching = workbox.strategies.networkFirst({
-            cacheName: 'vanguard-networkfirst-v2',
+            cacheName: 'vanguard-networkfirst-v1',
             plugins: [
                 new workbox.expiration.Plugin({
                     // Keep at most 50 entries.
