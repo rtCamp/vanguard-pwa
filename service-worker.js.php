@@ -36,23 +36,50 @@ if (workbox) {
 		}*/
 
 		return false;
-	}
+	};
+
+	var handler = async function ( obj ) {
+
+        var imagesCaching = workbox.strategies.networkFirst({
+            cacheName: 'vanguard-networkfirst-images-v1',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    // Keep at most 50 entries.
+                    maxEntries: 40,
+                    // Don't keep any entries for more than 1 hour.
+                    maxAgeSeconds: 60 * 60,
+                    // Automatically cleanup if quota is exceeded.
+                    purgeOnQuotaError: true
+                })
+            ]
+        });
+
+        var resourceCaching = workbox.strategies.networkFirst({
+            cacheName: 'vanguard-networkfirst-v2',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    // Keep at most 50 entries.
+                    maxEntries: 50,
+                    // Don't keep any entries for more than 1 hour.
+                    maxAgeSeconds: 60 * 60,
+                    // Automatically cleanup if quota is exceeded.
+                    purgeOnQuotaError: true
+                })
+            ]
+        })
+
+        var extension = obj.url.pathname.split( /\#|\?/ )[0].split( '/' ).pop().split( '.' ).pop();
+        if ( [ 'png', 'jpg', 'jpeg', 'gif', 'svg' ].includes( extension ) ) {
+            return imagesCaching.handle( obj );
+        } else {
+            return resourceCaching.handle( obj );
+        }
+
+    };
 
 	workbox.routing.registerRoute(
 		match,
-		workbox.strategies.networkFirst({
-			cacheName: 'vanguard-networkfirst-v2',
-			plugins: [
-				new workbox.expiration.Plugin({
-					// Keep at most 50 entries.
-					maxEntries: 50,
-					// Don't keep any entries for more than 1 hour.
-					maxAgeSeconds: 60 * 60,
-					// Automatically cleanup if quota is exceeded.
-					purgeOnQuotaError: true
-				})
-			]
-		})
+
 	);
 } else {
 	console.log(`Workbox didn't load 😬`);
