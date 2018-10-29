@@ -56,11 +56,16 @@ if (workbox) {
             ]
         };
 
-	    try {
-            return workbox.strategies.networkFirst( strategyObject ).handle( obj.event );
-        } catch ( err ) {
-            return caches.match( offlinePage );
+        var extension = obj.url.pathname.split( /\#|\?/ )[0].split( '/' ).pop().split( '.' ).pop();
+        if ( ! [ 'png', 'jpg', 'jpeg', 'js', 'css', 'woff2', 'svg', 'json' ].includes( extension ) ) {
+            try {
+                return workbox.strategies.networkFirst( strategyObject ).handle( obj );
+            } catch ( err ) {
+                return caches.match( offlinePage );
+            }
         }
+
+        return workbox.strategies.networkFirst( strategyObject ).handle( obj );
     };
 
 	workbox.routing.registerRoute(
