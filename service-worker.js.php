@@ -108,7 +108,6 @@ if (workbox) {
         }
 
         try {
-            console.log('response');
             var resp = await docCaching.handle( obj );
             if ( ! resp ) { throw 'Empty response'; }
             return resp;
