@@ -13,12 +13,27 @@ window.addEventListener( 'load', function () {
 		if ( typeof jQuery !== 'undefined' ) {
 			if ( !navigator.onLine ) {
 				var body = jQuery( 'body' );
-				var elem = '<div style="width: 100% !important;background-color: tomato;padding: 1em;color: white;text-align: center; font-weight: bold;" id="vanguard-pwa-offline-notice">You\'re Offline.</div>';
+				var elem = '<div style="width: 100% !important;background-color: #e6e6e6;padding: 1em;text-align: center; font-weight: bold;position: fixed;z-index: 100;" id="vanguard-pwa-offline-notice">You\'re Offline.</div>';
 
+				var first = body.children()[0];
+				first = jQuery( first );
 				body.prepend( elem );
+				elem = jQuery( '#vanguard-pwa-offline-notice' );
+				first.css( 'padding-top', elem.outerHeight() );
 			} else {
 				var elem = jQuery( '#vanguard-pwa-offline-notice' );
+				var height = elem.outerHeight();
 				elem.remove();
+
+				console.log(height);
+				var first = jQuery( 'body' ).children()[0];
+				first = jQuery( first );
+				console.log(first.css( 'padding-top' ));
+				height = first.css( 'padding-top' ) - height;
+				console.log(height);
+				height = ( height >= 0 ) ? height : 0;
+				console.log(height);
+				first.css( 'padding-top', height + 'px' );
 			}
 		}
 	}
