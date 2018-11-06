@@ -10,15 +10,3 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	wp_localize_script( 'vanguard-check-sw', 'workerData', array( 'workerUrl' => $worker_url ) );
 } );
-
-add_action( 'wp_head', function () {
-	if ( is_admin() ) {
-		return;
-	}
-	return;
-
-	$url = plugin_dir_url( __FILE__ ) . 'manifest.json';
-	?>
-	<link rel="manifest" href="<?php echo esc_url( $url ); ?>">
-	<?php
-} );
